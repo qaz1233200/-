@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>點擊進入</title>
 
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #000;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.fixed-btn {
+    position: fixed;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg,#06C755,#00E676);
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 85%;
+    max-width: 420px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    animation: pulse 1.2s infinite;
+    text-decoration: none;
+}
+
+.fixed-btn span:nth-child(2){
+    display:block;
+    font-size:22px;
+    color:#fffeb3;
+}
+
+@keyframes pulse {
+    0% {transform:translateX(-50%) scale(1);}
+    50% {transform:translateX(-50%) scale(1.1);}
+    100% {transform:translateX(-50%) scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 你的圖片 -->
+<img src="images/bg.jpg">
+
+<!-- LINE按鈕 -->
+<a class="fixed-btn" href="https://lin.ee/Y8GaHeT">
+    點擊進入<br>
+    <span>想了解</span>
+</a>
+
+</body>
+</html>
