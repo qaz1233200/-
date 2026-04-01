@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>資訊頁</title>
+<title>立即加入LINE</title>
 
 <style>
 body {
@@ -12,12 +12,31 @@ body {
   background: #000;
 }
 
+.wrapper {
+  position: relative;
+}
+
 img {
   width: 100%;
   display: block;
 }
 
-/* 固定爆點擊按鈕 */
+/* 底部提示 */
+.tip {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+/* 固定按鈕 */
 .fixed-btn {
   position: fixed;
   bottom: 20px;
@@ -35,8 +54,6 @@ img {
   box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   animation: pulse 1.2s infinite;
   overflow: hidden;
-  opacity: 0;
-  transition: 0.3s;
 }
 
 .fixed-btn span:nth-child(2) {
@@ -44,7 +61,7 @@ img {
   color: #ffeb3b;
 }
 
-/* 閃光 */
+/* 閃光掃描效果 */
 .fixed-btn::after {
   content: "";
   position: absolute;
@@ -64,32 +81,14 @@ img {
 
 @keyframes pulse {
   0% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.1); }
+  50% { transform: translateX(-50%) scale(1.08); }
   100% { transform: translateX(-50%) scale(1); }
 }
 
-/* 假留言 */
-.comments {
-  background: #fff;
-  padding: 15px;
-}
-
-.comment {
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #333;
-}
-
-/* 在線人數 */
-.live {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(1); }
 }
 
 </style>
@@ -97,67 +96,28 @@ img {
 
 <body>
 
-<!-- 在線人數 -->
-<div class="live" id="liveCount">👥 1287 人正在觀看</div>
-
-<!-- 主圖 -->
-<img src="ChatGPT Image 2026年4月1日 下午11_53_12.png" id="mainImg">
-
-<!-- 假留言區 -->
-<div class="comments">
-  <div class="comment">🔥 已經跟了三天，真的有差</div>
-  <div class="comment">👍 剛加入就看到內容了</div>
-  <div class="comment">💬 感覺蠻準的，有料</div>
+<div class="wrapper" id="clickArea">
+  <img src="你的圖片.jpg">
+  <div class="tip">👇 點擊畫面立即加入LINE 👇</div>
 </div>
 
-<!-- 按鈕 -->
-<div class="fixed-btn" id="btn">
-🔥點擊觀看<br>
-<span>🔥今彩539</span><br>
-🔥強勢版路
-</div>
+<div class="fixed-btn" id="btn">🔥點擊觀看<br>🔥今彩539<br>🔥強勢版路</div>
 
 <script>
-const encoded = "aHR0cHM6Ly9saW4uZWUvbmxvVWFVSg==";
+// 🔐 Base64隱藏LINE
+const encoded = "aHR0cHM6Ly9saW4uZWUvbmxvVWFVSg=="; // 換你的
 const targetUrl = atob(encoded);
 
-let activated = false;
-
-// 滾動啟動
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100) {
-    activated = true;
-    btn.style.opacity = 1;
-  }
-});
-
-// 任意點擊（啟動後）
-document.body.addEventListener("click", function() {
-  if (activated) {
-    window.location.href = targetUrl;
-  }
-});
-
-// 按鈕點擊
-btn.addEventListener("click", function(e) {
-  e.stopPropagation();
+// 👉 任意點擊跳轉
+document.getElementById("clickArea").addEventListener("click", function() {
   window.location.href = targetUrl;
 });
 
-// 假在線人數浮動
-setInterval(() => {
-  let num = Math.floor(Math.random() * 50) + 1200;
-  document.getElementById("liveCount").innerText = `👥 ${num} 人正在觀看`;
-}, 3000);
-
-// 手機震動
-function vibrate() {
-  if (navigator.vibrate) {
-    navigator.vibrate(50);
-  }
-}
-
-document.body.addEventListener("click", vibrate);
+// 👉 按鈕點擊跳轉
+document.getElementById("btn").addEventListener("click", function(e) {
+  e.stopPropagation();
+  window.location.href = targetUrl;
+});
 
 </script>
 
