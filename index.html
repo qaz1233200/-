@@ -3,64 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>點擊進入</title>
+<title>我的網站</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: url('imagesbg.jpg.png') no-repeat center center fixed;
-background-size: cover;
+    background-size: cover;
 }
 
-img {
-    width: 100%;
-    display: block;
-}
-
-.fixed-btn {
+/* 黑色半透明遮罩 */
+.overlay {
     position: fixed;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg,#06C755,#00E676);
-    color: #fff;
-    padding: 16px 28px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+/* 內容區 */
+.content {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+/* 標題 */
+h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+/* 副標 */
+p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* 按鈕 */
+.btn {
+    background: linear-gradient(90deg, #06C755, #00E676);
+    color: white;
+    padding: 15px 30px;
     border-radius: 30px;
     font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    width: 85%;
-    max-width: 420px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    animation: pulse 1.2s infinite;
     text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: 0.3s;
 }
 
-.fixed-btn span:nth-child(2){
-    display:block;
-    font-size:22px;
-    color:#fffeb3;
-}
-
-@keyframes pulse {
-    0% {transform:translateX(-50%) scale(1);}
-    50% {transform:translateX(-50%) scale(1.1);}
-    100% {transform:translateX(-50%) scale(1);}
+.btn:hover {
+    transform: scale(1.1);
 }
 </style>
 </head>
 
 <body>
 
-<!-- 你的圖片 -->
-<img src="images/bg.jpg">
+<div class="overlay"></div>
 
-<!-- LINE按鈕 -->
-<a class="fixed-btn" href="https://lin.ee/Y8GaHeT">
-    點擊進入<br>
-    <span>想了解</span>
-</a>
+<div class="content">
+    <h1>機會只給準備好的人</h1>
+    <p>現在就是改變的開始 🚀</p>
+
+    <!-- ✅ 已幫你放入官方LINE -->
+    <a href="https://lin.ee/Y8GaHeT" class="btn" target="_blank">
+        👉 立即加入官方LINE
+    </a>
+</div>
 
 </body>
 </html>
