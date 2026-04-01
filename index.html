@@ -9,61 +9,53 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #000;
-}
-
-/* 背景 */
-.wrapper {
-  position: relative;
-  height: 100vh;
   overflow: hidden;
 }
 
-.wrapper img {
+/* 背景 */
+.bg {
+  position: fixed;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: brightness(0.7);
+  background: url("https://raw.githubusercontent.com/qaz1233200/-/main/imagesbg.jpg.png") no-repeat center;
+  background-size: cover;
+  filter: brightness(0.6);
 }
 
-/* 黑色漸層遮罩 */
+/* 漸層遮罩 */
 .overlay {
-  position: absolute;
-  top: 0;
+  position: fixed;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
 }
 
-/* 標題文字 */
-.title {
+/* 主內容 */
+.content {
   position: absolute;
   top: 30%;
   width: 100%;
   text-align: center;
   color: #fff;
-  font-size: 28px;
+  padding: 20px;
+}
+
+/* 主標題 */
+.title {
+  font-size: 32px;
   font-weight: bold;
-  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  text-shadow: 0 0 15px rgba(0,0,0,0.8);
 }
 
-/* 提示 */
-.tip {
-  position: absolute;
-  bottom: 90px;
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  font-size: 16px;
-  animation: blink 1.2s infinite;
+/* 副標 */
+.subtitle {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #ffeb3b;
 }
 
-@keyframes blink {
-  50% { opacity: 0.4; }
-}
-
-/* 按鈕（升級版） */
-.fixed-btn {
+/* 按鈕 */
+.btn {
   position: fixed;
   bottom: 25px;
   left: 50%;
@@ -72,7 +64,7 @@ body {
   max-width: 420px;
 
   padding: 18px;
-  border-radius: 40px;
+  border-radius: 50px;
 
   background: linear-gradient(135deg,#06C755,#00e676);
   color: #fff;
@@ -80,39 +72,35 @@ body {
   font-weight: bold;
   text-align: center;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6),
-              inset 0 0 10px rgba(255,255,255,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 
-  animation: pulse 1.5s infinite;
-  overflow: hidden;
+  transition: 0.2s;
 }
 
-/* 發光掃描 */
-.fixed-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: rgba(255,255,255,0.5);
-  transform: skewX(-20deg);
-  animation: shine 2s infinite;
+.btn:active {
+  transform: translateX(-50%) scale(0.95);
 }
 
-@keyframes shine {
-  100% { left: 150%; }
-}
-
-@keyframes pulse {
-  50% { transform: translateX(-50%) scale(1.07); }
-}
-
-/* 副標 */
-.sub {
+/* 小字 */
+.small {
   font-size: 14px;
   color: #ffeb3b;
   margin-top: 5px;
+}
+
+/* 提示 */
+.tip {
+  position: fixed;
+  bottom: 90px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.4; }
 }
 
 </style>
@@ -120,33 +108,34 @@ body {
 
 <body>
 
-<div class="wrapper" id="clickArea">
-  <img src="imagesbg.jpg.png">
-  <div class="overlay"></div>
+<div class="bg"></div>
+<div class="overlay"></div>
 
+<div class="content" id="clickArea">
   <div class="title">機會只給準備好的人</div>
-  <div class="tip">👇 點擊畫面立即加入LINE 👇</div>
+  <div class="subtitle">現在就是翻身的機會 🔥</div>
 </div>
 
-<div class="fixed-btn" id="btn">
-  🔥立即加入LINE
-  <div class="sub">限時免費領取資源</div>
+<div class="tip">👇 點擊任意位置立即加入 👇</div>
+
+<div class="btn" id="btn">
+  🚀 立即加入LINE
+  <div class="small">免費領取獨家資訊</div>
 </div>
 
 <script>
-// 👉 你的LINE連結（已幫你放好）
 const targetUrl = "https://lin.ee/Y8GaHeT";
 
 // 全畫面點擊
-document.getElementById("clickArea").addEventListener("click", function() {
+document.getElementById("clickArea").onclick = () => {
   window.location.href = targetUrl;
-});
+};
 
 // 按鈕點擊
-document.getElementById("btn").addEventListener("click", function(e) {
+document.getElementById("btn").onclick = (e) => {
   e.stopPropagation();
   window.location.href = targetUrl;
-});
+};
 </script>
 
 </body>
