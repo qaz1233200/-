@@ -113,41 +113,45 @@ body {
 </div>
 
 <script>
+// ==========================
 // 👉 LINE連結
+// ==========================
 const targetUrl = "https://lin.ee/Y8GaHeT";
 
 
-// =========================
-// 🔥 防返回核心
-// =========================
-history.pushState(null, null, location.href);
+// ==========================
+// 🔥 防返回（強化版）
+// ==========================
+(function () {
+    // 初始化
+    history.replaceState(null, null, location.href);
 
-window.addEventListener('popstate', function () {
+    // 疊兩層（更穩）
     history.pushState(null, null, location.href);
-});
+
+    window.addEventListener("popstate", function () {
+        history.pushState(null, null, location.href);
+    });
+})();
 
 
-// =========================
-// 👉 跳轉函式（開新頁）
-// =========================
+// ==========================
+// 👉 跳轉函式（新分頁）
+// ==========================
 function goLine() {
     window.open(targetUrl, '_blank', 'noopener,noreferrer');
 }
 
 
-// =========================
+// ==========================
 // 👉 點擊事件
-// =========================
-
-// 點背景
+// ==========================
 document.getElementById("clickArea").onclick = goLine;
 
-// 點按鈕
 document.getElementById("btn").onclick = function(e){
     e.stopPropagation();
     goLine();
 };
-
 </script>
 
 </body>
