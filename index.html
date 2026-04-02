@@ -8,150 +8,113 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-}
-
-/* 背景 */
-.bg {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url("https://raw.githubusercontent.com/qaz1233200/-/main/imagesbg.jpg.png") no-repeat center;
-  background-size: cover;
-  filter: brightness(0.6);
-}
-
-/* 遮罩 */
-.overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2));
-}
-
-/* 內容 */
-.content {
-  position: absolute;
-  top: 30%;
-  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f5f5f5;
   text-align: center;
-  color: #fff;
+}
+
+/* 主卡片 */
+.card {
+  background: white;
+  margin: 20px;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* 圖片 */
+.card img {
+  width: 100%;
+  border-radius: 15px;
 }
 
 /* 標題 */
 .title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
-  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  margin: 20px 0 10px;
 }
 
-/* 提示 */
-.tip {
-  position: fixed;
-  bottom: 90px;
-  width: 100%;
-  text-align: center;
-  color: #fff;
+/* 副標 */
+.subtitle {
+  color: #666;
   font-size: 16px;
-  animation: blink 1.2s infinite;
+  margin-bottom: 20px;
 }
 
-@keyframes blink {
-  50% { opacity: 0.4; }
+/* 勾勾 */
+.check {
+  color: #06C755;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 /* 按鈕 */
 .btn {
-  position: fixed;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 85%;
-  max-width: 420px;
-
+  display: block;
+  margin: 20px;
+  background: linear-gradient(90deg,#06C755,#00e676);
+  color: white;
   padding: 18px;
   border-radius: 40px;
-
-  background: linear-gradient(135deg,#06C755,#00e676);
-  color: #fff;
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  transition: 0.2s;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  animation: pulse 1.2s infinite;
 }
 
-.btn:active {
-  transform: translateX(-50%) scale(0.95);
+/* 呼吸效果 */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-/* 小字 */
-.small {
-  font-size: 14px;
-  color: #ffeb3b;
-  margin-top: 5px;
-}
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="overlay"></div>
+<div class="card" id="clickArea">
+  <img src="imagesbg.jpg.png">
 
-<div class="content" id="clickArea">
-  <div class="title">機會只給準備好的人</div>
+  <div class="title">雙車電台</div>
+
+  <div class="subtitle">
+    ～所有版路皆已整理完成～<br>
+    歡迎加入收聽
+  </div>
+
+  <div class="check">✔ 連中五期中，LINE同步更新</div>
 </div>
 
-<div class="tip">👇 點擊任意位置立即加入 👇</div>
-
-<div class="btn" id="btn">
-  🚀 立即加入LINE
-  <div class="small">觀看最新強勢版路🔥</div>
-</div>
+<a class="btn" id="btn">
+👉 立即加入LINE<br>
+觀看最新強勢版路🔥
+</a>
 
 <script>
-// ==========================
-// 👉 LINE連結
-// ==========================
-const targetUrl = "https://lin.ee/Y8GaHeT";
+// 🔐 你的LINE
+const encoded = "aHR0cHM6Ly9saW4uZWUvWTJHYUhlVA==";
+const targetUrl = atob(encoded);
 
-
-// ==========================
-// 🔥 防返回（強化版）
-// ==========================
-(function () {
-    // 初始化
-    history.replaceState(null, null, location.href);
-
-    // 疊兩層（更穩）
-    history.pushState(null, null, location.href);
-
-    window.addEventListener("popstate", function () {
-        history.pushState(null, null, location.href);
-    });
-})();
-
-
-// ==========================
-// 👉 跳轉函式（新分頁）
-// ==========================
-function goLine() {
-    window.open(targetUrl, '_blank', 'noopener,noreferrer');
-}
-
-
-// ==========================
-// 👉 點擊事件
-// ==========================
-document.getElementById("clickArea").onclick = goLine;
-
-document.getElementById("btn").onclick = function(e){
-    e.stopPropagation();
-    goLine();
+// 👉 點擊整頁
+document.getElementById("clickArea").onclick = function() {
+  window.open(targetUrl, "_blank");
 };
+
+// 👉 按鈕
+document.getElementById("btn").onclick = function() {
+  window.open(targetUrl, "_blank");
+};
+
+// 🔥 防返回（強版）
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+  history.pushState(null, null, location.href);
+};
+
 </script>
 
 </body>
