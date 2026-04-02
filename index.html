@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>立即加入LINE</title>
+<title>立即查看</title>
 
 <style>
 body {
@@ -13,7 +13,6 @@ body {
   text-align: center;
 }
 
-/* 主卡片 */
 .card {
   background: white;
   margin: 20px;
@@ -22,34 +21,30 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* 圖片 */
 .card img {
   width: 100%;
   border-radius: 15px;
 }
 
-/* 標題 */
 .title {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
   margin: 20px 0 10px;
 }
 
-/* 副標 */
 .subtitle {
   color: #666;
   font-size: 16px;
   margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-/* 勾勾 */
 .check {
   color: #06C755;
   font-size: 16px;
   margin-bottom: 20px;
 }
 
-/* 按鈕 */
 .btn {
   display: block;
   margin: 20px;
@@ -64,13 +59,11 @@ body {
   animation: pulse 1.2s infinite;
 }
 
-/* 呼吸效果 */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
-
 </style>
 </head>
 
@@ -79,14 +72,14 @@ body {
 <div class="card" id="clickArea">
   <img src="imagesbg.jpg.png">
 
-  <div class="title">雙車電台</div>
+  <div class="title">最新強勢版路已整理完成</div>
 
   <div class="subtitle">
-    ～所有版路皆已整理完成～<br>
-    歡迎加入收聽
+    每日更新數據分析<br>
+    提供穩定參考方向
   </div>
 
-  <div class="check">✔ 連中五期中，LINE同步更新</div>
+  <div class="check">✔ 持續更新中，LINE同步通知</div>
 </div>
 
 <a class="btn" id="btn">
@@ -95,26 +88,47 @@ body {
 </a>
 
 <script>
-// 🔐 你的LINE
-const encoded = "aHR0cHM6Ly9saW4uZWUvWTJHYUhlVA==";
-const targetUrl = atob(encoded);
+// ==========================
+// 👉 LINE連結
+// ==========================
+const targetUrl = "https://lin.ee/7kysPZ5";
 
-// 👉 點擊整頁
-document.getElementById("clickArea").onclick = function() {
-  window.open(targetUrl, "_blank");
+
+// ==========================
+// 🔥 最強防返回（多層鎖）
+// ==========================
+(function () {
+    // 疊兩層歷史
+    history.pushState(null, null, location.href);
+    history.pushState(null, null, location.href);
+
+    // 返回強制往前
+    window.onpopstate = function () {
+        history.go(1);
+    };
+
+    // 每1秒補一次（防特殊瀏覽器）
+    setInterval(function () {
+        history.pushState(null, null, location.href);
+    }, 1000);
+})();
+
+
+// ==========================
+// 👉 跳轉（新分頁）
+// ==========================
+function goLine() {
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
+}
+
+// 點擊整頁
+document.getElementById("clickArea").onclick = goLine;
+
+// 按鈕
+document.getElementById("btn").onclick = function(e){
+    e.stopPropagation();
+    goLine();
 };
-
-// 👉 按鈕
-document.getElementById("btn").onclick = function() {
-  window.open(targetUrl, "_blank");
-};
-
-// 🔥 防返回（強版）
-history.pushState(null, null, location.href);
-window.onpopstate = function () {
-  history.pushState(null, null, location.href);
-};
-
 </script>
 
 </body>
