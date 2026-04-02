@@ -22,36 +22,43 @@ body {
   filter: brightness(0.6);
 }
 
-/* 漸層遮罩 */
+/* 遮罩 */
 .overlay {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2));
 }
 
-/* 主內容 */
+/* 內容 */
 .content {
   position: absolute;
   top: 30%;
   width: 100%;
   text-align: center;
   color: #fff;
-  padding: 20px;
 }
 
-/* 主標題 */
+/* 標題 */
 .title {
   font-size: 32px;
   font-weight: bold;
-  text-shadow: 0 0 15px rgba(0,0,0,0.8);
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
 }
 
-/* 副標 */
-.subtitle {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #ffeb3b;
+/* 提示 */
+.tip {
+  position: fixed;
+  bottom: 90px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.4; }
 }
 
 /* 按鈕 */
@@ -64,7 +71,7 @@ body {
   max-width: 420px;
 
   padding: 18px;
-  border-radius: 50px;
+  border-radius: 40px;
 
   background: linear-gradient(135deg,#06C755,#00e676);
   color: #fff;
@@ -73,7 +80,6 @@ body {
   text-align: center;
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-
   transition: 0.2s;
 }
 
@@ -87,22 +93,6 @@ body {
   color: #ffeb3b;
   margin-top: 5px;
 }
-
-/* 提示 */
-.tip {
-  position: fixed;
-  bottom: 90px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 16px;
-  animation: blink 1.2s infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0.4; }
-}
-
 </style>
 </head>
 
@@ -123,18 +113,41 @@ body {
 </div>
 
 <script>
+// 👉 LINE連結
 const targetUrl = "https://lin.ee/Y8GaHeT";
 
-// 全畫面點擊
-document.getElementById("clickArea").onclick = () => {
-  window.location.href = targetUrl;
+
+// =========================
+// 🔥 防返回核心
+// =========================
+history.pushState(null, null, location.href);
+
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, location.href);
+});
+
+
+// =========================
+// 👉 跳轉函式（開新頁）
+// =========================
+function goLine() {
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+}
+
+
+// =========================
+// 👉 點擊事件
+// =========================
+
+// 點背景
+document.getElementById("clickArea").onclick = goLine;
+
+// 點按鈕
+document.getElementById("btn").onclick = function(e){
+    e.stopPropagation();
+    goLine();
 };
 
-// 按鈕點擊
-document.getElementById("btn").onclick = (e) => {
-  e.stopPropagation();
-  window.location.href = targetUrl;
-};
 </script>
 
 </body>
